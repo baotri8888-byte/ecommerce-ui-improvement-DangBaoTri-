@@ -63,4 +63,4 @@ ecommerce-ui-improvement-DangBaoTri-/
 ```
 
 ## 9. Nguồn ảnh
-Ảnh minh họa sản phẩm chỉ dùng cho mục đích học tập. Nguồn: [ĐIỀN NGUỒN ẢNH CỦA BẠN, ví dụ: ảnh tham khảo từ zara.com/vn, hoặc Unsplash/Pexels kèm tên tác giả].
+Ảnh minh họa sản phẩm chỉ dùng cho mục đích học tập. Nguồn: ảnh tham khảo từ zara.com/vn.
