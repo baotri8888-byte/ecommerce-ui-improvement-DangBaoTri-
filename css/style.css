@@ -1,0 +1,197 @@
+/* =========================================================
+   Cải tiến thẻ sản phẩm – mobile-first
+   Mục lục: 1 Biến · 2 Nền tảng · 3 Tiêu đề · 4 Lưới
+            5 Thẻ · 6 Giá · 7 Ô màu · 8 Nút · 9 Responsive
+   ========================================================= */
+
+/* 1. Biến (đổi màu/cỡ chữ tại một chỗ) */
+:root {
+  --text: #111111;
+  --muted: #6b6b6b;      /* giá gốc, mô tả phụ */
+  --line: #e3e3e0;
+  --bg: #ffffff;
+  --sale: #c1121f;       /* màu nhấn: giá mới và nhãn giảm giá */
+  --on-sale: #ffffff;
+  --gap: 16px;
+  --radius: 2px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* 2. Nền tảng */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.4;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* Chữ chỉ dành cho trình đọc màn hình */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 3. Tiêu đề và chân trang */
+.page-header,
+.products,
+.page-footer {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gap);
+}
+
+.page-header { padding-block: 24px 16px; }
+.page-header h1 { margin: 0 0 4px; font-size: 1.5rem; font-weight: 600; }
+.page-header p { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+
+.page-footer { padding-block: 32px; color: var(--muted); font-size: 0.8125rem; }
+.page-footer p { margin: 0; }
+
+/* 4. Lưới sản phẩm: 2 cột trên điện thoại */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px var(--gap);
+}
+
+/* 5. Thẻ sản phẩm */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card__media {
+  position: relative;
+  margin: 0 0 12px;
+  aspect-ratio: 3 / 4;
+  background: #ecece8;
+  overflow: hidden;
+}
+
+.product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nhãn % giảm nằm ở góc ảnh, tách khỏi khối giá */
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 8px;
+  background: var(--sale);
+  color: var(--on-sale);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-radius: var(--radius);
+}
+
+/* Tên: tối đa 2 dòng, chừa sẵn chiều cao 2 dòng để các thẻ không lệch nhau */
+.product-card__name {
+  margin: 0 0 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  min-height: calc(2 * 1.35em);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 6. Giá: giá mới to và đậm, giá gốc nhỏ, xám, gạch ngang */
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  margin: 0 0 12px;
+}
+
+.price__sale {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--sale);
+}
+
+.price__original {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* 7. Ô màu: tròn 24px, có viền để màu tối vẫn phân biệt được */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 6px;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--swatch);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--muted);
+}
+
+/* Tên màu hiện thành chữ (điện thoại không có hover nên không dùng title) */
+.swatch-names {
+  margin: 0 0 16px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+/* 8. Nút thêm vào giỏ: rộng bằng thẻ, cao tối thiểu 44px */
+.btn {
+  margin-top: auto;           /* luôn nằm đáy thẻ */
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.btn:hover { background: var(--bg); color: var(--text); }
+
+.btn:focus-visible {
+  outline: 3px solid var(--sale);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+/* 9. Responsive */
+@media (min-width: 600px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  :root { --gap: 24px; }
+  .product-grid { grid-template-columns: repeat(4, 1fr); }
+  .page-header h1 { font-size: 1.875rem; }
+}
